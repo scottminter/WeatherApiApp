@@ -15,6 +15,7 @@
 		58CCDDE31A7FE96A0043D2E9 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 58CCDDE11A7FE96A0043D2E9 /* LaunchScreen.xib */; };
 		58CCDDEF1A7FE96A0043D2E9 /* Weather_API_AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CCDDEE1A7FE96A0043D2E9 /* Weather_API_AppTests.swift */; };
 		58CCDDF91A7FEECF0043D2E9 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58CCDDF81A7FEECF0043D2E9 /* SecondViewController.swift */; };
+		58CCDDFB1A8160950043D2E9 /* clouds-41a.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 58CCDDFA1A8160950043D2E9 /* clouds-41a.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		58CCDDED1A7FE96A0043D2E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		58CCDDEE1A7FE96A0043D2E9 /* Weather_API_AppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather_API_AppTests.swift; sourceTree = "<group>"; };
 		58CCDDF81A7FEECF0043D2E9 /* SecondViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		58CCDDFA1A8160950043D2E9 /* clouds-41a.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "clouds-41a.jpg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 				58CCDDD51A7FE96A0043D2E9 /* AppDelegate.swift */,
 				58CCDDDA1A7FE96A0043D2E9 /* ViewController.swift */,
 				58CCDDF81A7FEECF0043D2E9 /* SecondViewController.swift */,
+				58CCDDFA1A8160950043D2E9 /* clouds-41a.jpg */,
 				58CCDDDC1A7FE96A0043D2E9 /* Main.storyboard */,
 				58CCDDDF1A7FE96A0043D2E9 /* Images.xcassets */,
 				58CCDDE11A7FE96A0043D2E9 /* LaunchScreen.xib */,
@@ -200,6 +203,7 @@
 			files = (
 				58CCDDDE1A7FE96A0043D2E9 /* Main.storyboard in Resources */,
 				58CCDDE31A7FE96A0043D2E9 /* LaunchScreen.xib in Resources */,
+				58CCDDFB1A8160950043D2E9 /* clouds-41a.jpg in Resources */,
 				58CCDDE01A7FE96A0043D2E9 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
