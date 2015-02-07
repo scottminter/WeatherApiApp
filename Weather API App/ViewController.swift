@@ -9,6 +9,30 @@
 import UIKit
 
 var WeatherResults = NSData()
+var WeatherErrors = NSError()
+
+func getWeatherData(WeatherUrl: String)->NSURLSessionDataTask {
+    let url = NSURL(string: WeatherUrl)
+println(url)
+    let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {
+        (data, response, error) in
+
+        if error == nil {
+            var info = data
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                WeatherResults = info!
+                println("We just got data back")
+            }
+        }
+        else {
+            WeatherErrors = error
+            println("error: \(error)")
+        }
+    }
+    
+    return task
+}
 
 class ViewController: UIViewController {
     
@@ -19,9 +43,10 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var cityInput: UITextField!
     @IBOutlet weak var stateInput: UITextField!
+    @IBOutlet weak var submitButtonOutlet: UIButton!
+    @IBOutlet var ViewCtrlr: UIView!
     
     @IBAction func submitButton(sender: AnyObject) {
-println("SBUMIT")
         /**
          * We gotta put the URL together first
          */
@@ -48,40 +73,23 @@ println("SBUMIT")
             self.WeatherUrl = urlWithCityAndState
         }
         
-println(self.WeatherUrl)
-        
         /**
          * Now lets get some weather
          */
-        let url = NSURL(string: self.WeatherUrl)
-
-        let task = NSURLSession.sharedSession().dataTaskWithURL(url!) {
-            (data, response, error) in
-            
-            if error == nil {
-                var info = data
-
-                dispatch_async(dispatch_get_main_queue()) {
-                    WeatherResults = info!
-                }
-            }
-            else {
-                self.ApiError = true
-                println("Error: \(error)")
-            }
-        }
+        var task = getWeatherData(self.WeatherUrl)
+        task.resume()
         
-        //I don't want to segue until the data has arrived.  
-        //Is this the correct way to do that?
-        task.resume( performSegueWithIdentifier("segue1", sender: self))
+        //Segue Now
+        performSegueWithIdentifier("segue1", sender: self)
     }
     
+    //Passing data to SecondViewController
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-println("SEGUE")
         if segue.identifier == "segue1" {
             var svc = segue.destinationViewController as SecondViewController
             
             var locationObj = Dictionary<String, String>()
+            locationObj["url"] = self.WeatherUrl as String
             locationObj["cityName"] = self.cityName
             locationObj["stateCode"] = self.stateCode
             
@@ -90,36 +98,29 @@ println("SEGUE")
     }
     
     override func viewDidAppear(animated: Bool) {
+        //Seeing some occasional strange behavior where the previous city is put
+        //in the new search.  This is just outputting the current cityName and 
+        //stateCode when the veiw comes back into...err...view. 
+        //Seems to be an api issue.
+        
         println("City Name: \(self.cityName)")
         println("State Code: \(self.stateCode)")
+        //self.cityInput.text = "Virginia Beach"
+        //self.stateInput.text = "VA"
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        //self.cityInput.text = "Newport News"
-        //self.stateInput.text = "va"
+println("\n\n******** NEW RUN *********")
+        //self.cityInput.text = "Newport Bad News"
+        //self.stateInput.text = "VA"
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    //THIS FUNCITON CAN PREVENT THE SEGUE TO THE SECOND VIEW CONTROLLER
-    override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
-       
-        if cityInput.text.isEmpty || cityInput.text.isEmpty {
-            return false
-        }
-        else {
-            return true
-        }
-
-        //return false
-
-    }
-
 }
 
